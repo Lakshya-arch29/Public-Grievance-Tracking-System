@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>New Grievance</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <h2>JanSunwai</h2>
+<a href="dashboard.html" class="back-dashboard">
+    Back to Dashboard
+</a>
+    </header>
+
+    <main class="dashboard">
+
+        <div class="form-card">
+
+            <h1>Report a Grievance</h1>
+
+            <form id="grievanceForm">
+
+                <label>Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    minlength="5"
+                    maxlength="150"
+                    required
+                >
+
+                <label>Category</label>
+                <select id="category" required>
+                    <option value="">Select category</option>
+                    <option value="1">Roads & Potholes</option>
+                    <option value="2">Garbage & Cleanliness</option>
+                    <option value="3">Water Supply</option>
+                    <option value="4">Electricity & Street Lights</option>
+                    <option value="5">Drainage & Sewage</option>
+                    <option value="6">Pollution</option>
+                    <option value="7">Public Transport</option>
+                    <option value="8">Parks & Public Spaces</option>
+                    <option value="9">Stray Animals</option>
+                    <option value="10">Health & Hospitals</option>
+                    <option value="11">Illegal Construction & Encroachment</option>
+                    <option value="12">Other</option>
+                </select>
+
+                <label>City</label>
+                <select id="city" required>
+                    <option value="">Select city</option>
+                    <option value="1">Mumbai</option>
+                    <option value="2">Pune</option>
+                    <option value="3">Nagpur</option>
+                    <option value="4">Thane</option>
+                    <option value="5">Nashik</option>
+                    <option value="6">Delhi</option>
+                    <option value="7">Bengaluru</option>
+                    <option value="8">Hyderabad</option>
+                </select>
+
+                <label>Area / Ward</label>
+                <input type="text" id="area" required>
+
+                <label>Priority</label>
+                <select id="priority">
+                    <option value="LOW">Low</option>
+                    <option value="MEDIUM" selected>Medium</option>
+                    <option value="HIGH">High</option>
+                </select>
+
+                <label>Description</label>
+                <textarea
+                    id="description"
+                    minlength="10"
+                    maxlength="2000"
+                    rows="6"
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    Submit Grievance
+                </button>
+
+            </form>
+
+            <div id="message"></div>
+
+        </div>
+
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/citizen.js"></script>
+    <a href="#" class="logout-button" onclick="logout()">
+    Logout
+</a>
+
+<script src="../js/logout.js"></script>
+
+</body>
+</html>

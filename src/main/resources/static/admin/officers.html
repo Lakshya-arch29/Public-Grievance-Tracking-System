@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Officers - JanSunwai</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <h1>Officer Management</h1>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="grievances.html">Grievances</a>
+        <a href="officers.html">Officers</a>
+
+    </nav>
+
+    <h2>Officer Directory</h2>
+
+    <input
+        type="text"
+        id="officerSearch"
+        placeholder="Search officers"
+    >
+
+    <select id="activeFilter">
+        <option value="">All Officers</option>
+        <option value="true">Active</option>
+        <option value="false">Inactive</option>
+    </select>
+
+    <button onclick="loadOfficers()">Search</button>
+
+    <br><br>
+
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Pending</th>
+                <th>Resolved</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="officerTable">
+            <tr>
+                <td colspan="8">No officers loaded.</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <h2>Add Officer</h2>
+
+    <form id="officerForm">
+
+        <label>Username</label>
+        <br>
+        <input type="text" id="username" required>
+
+        <br><br>
+
+        <label>Password</label>
+        <br>
+        <input type="password" id="password" required>
+
+        <br><br>
+
+        <label>Email</label>
+        <br>
+        <input type="email" id="email" required>
+
+        <br><br>
+
+        <label>Phone</label>
+        <br>
+        <input type="text" id="phone" required>
+
+        <br><br>
+
+        <button type="submit">Create Officer</button>
+
+    </form>
+
+    <script src="../js/admin.js"></script>
+    <a href="#" class="logout-button" onclick="logout()">
+    Logout
+</a>
+
+<script src="../js/logout.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Citizen Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+        <h2>JanSunwai</h2>
+
+    </header>
+
+    <main class="dashboard">
+
+        <h1>Citizen Dashboard</h1>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3>Total</h3>
+                <p id="total">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending</h3>
+                <p id="pending">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>In Progress</h3>
+                <p id="inProgress">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Resolved</h3>
+                <p id="resolved">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Rejected</h3>
+                <p id="rejected">0</p>
+            </div>
+
+        </div>
+
+      <a href="new-grievance.html" class="action-link">
+    New Grievance
+</a>
+        </a>
+
+        <h2>My Grievances</h2>
+
+        <div id="grievanceList">
+            <p>No grievances yet.</p>
+        </div>
+
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/citizen.js"></script>
+    <a href="#" class="logout-button" onclick="logout()">
+    Logout
+</a>
+
+<script src="../js/logout.js"></script>
+
+</body>
+</html>
+

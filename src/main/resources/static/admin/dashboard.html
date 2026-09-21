@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - JanSunwai</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <h1>JanSunwai Admin Dashboard</h1>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="grievances.html">Grievances</a>
+        <a href="officers.html">Officers</a>
+    </nav>
+
+    <h2>System Overview</h2>
+
+    <div>
+        <h3>Total Grievances</h3>
+        <p id="totalGrievances">0</p>
+    </div>
+
+    <div>
+        <h3>Pending</h3>
+        <p id="pendingGrievances">0</p>
+    </div>
+
+    <div>
+        <h3>In Progress</h3>
+        <p id="inProgressGrievances">0</p>
+    </div>
+
+    <div>
+        <h3>Resolved</h3>
+        <p id="resolvedGrievances">0</p>
+    </div>
+
+    <div>
+        <h3>Overdue</h3>
+        <p id="overdueGrievances">0</p>
+    </div>
+
+    <div>
+        <h3>Unassigned</h3>
+        <p id="unassignedGrievances">0</p>
+    </div>
+
+    <h2>Grievances by Category</h2>
+
+    <div id="categoryList">
+        <p>No data available yet.</p>
+    </div>
+
+    <h2>City Statistics</h2>
+
+    <div id="cityList">
+        <p>No data available yet.</p>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <a href="#" class="logout-button" onclick="logout()">
+    Logout
+</a>
+
+<script src="../js/logout.js"></script>
+
+</body>
+</html>

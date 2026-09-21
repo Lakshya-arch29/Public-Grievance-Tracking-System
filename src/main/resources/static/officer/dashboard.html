@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Officer Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <h2>JanSunwai</h2>
+
+    </header>
+
+    <main class="dashboard">
+
+        <h1>Officer Dashboard</h1>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3>Assigned</h3>
+                <p>12</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending</h3>
+                <p>5</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>In Progress</h3>
+                <p>3</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Resolved</h3>
+                <p>4</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Overdue</h3>
+                <p>2</p>
+            </div>
+
+        </div>
+
+        <h2>My Grievances</h2>
+
+        <div class="filters">
+
+            <select>
+                <option>All Status</option>
+                <option>Pending</option>
+                <option>In Progress</option>
+                <option>Resolved</option>
+                <option>Rejected</option>
+            </select>
+
+            <select>
+                <option>All Priority</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+            </select>
+
+            <input
+                type="text"
+                placeholder="Search title or area"
+            >
+
+        </div>
+
+        <div id="grievanceList">
+            <p>No grievances found.</p>
+        </div>
+
+    </main>
+<a href="#" class="logout-button" onclick="logout()">
+    Logout
+</a>
+
+<script src="../js/logout.js"></script>
+</body>
+</html>
