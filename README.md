@@ -10,7 +10,7 @@ JanSunwai lets citizens file grievances (potholes, water shortage, garbage, stre
 
 ## Quickstart (local run)
 
-Full step-by-step guide: **[docs/LOCAL_SETUP.md](docs/LOCAL_SETUP.md)** (includes troubleshooting).
+Full step-by-step guide: **(LOCAL_SETUP.md)** (includes troubleshooting).
 
 Short version:
 
