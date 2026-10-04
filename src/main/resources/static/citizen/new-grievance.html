@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Grievance - JanSewa</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="navbar"><img src="../img/logo-mark.png" class="nav-logo" alt=""><h2>JanSewa</h2></header>
+
+    <main class="dashboard">
+
+        <a href="dashboard.html" class="back-dashboard">&larr; Back to dashboard</a>
+
+        <div class="form-card">
+            <h1>File a Grievance</h1>
+
+            <form id="grievanceForm">
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Short summary, e.g. Pothole on MG Road" required>
+
+                <label for="category">Category</label>
+                <select id="category" required><option value="">Loading...</option></select>
+
+                <label for="city">City</label>
+                <select id="city" required><option value="">Loading...</option></select>
+
+                <label for="area">Area / Ward</label>
+                <input type="text" id="area" placeholder="e.g. Ward 4, near the bus stop" required>
+
+                <label for="priority">Priority</label>
+                <select id="priority">
+                    <option value="LOW">Low</option>
+                    <option value="MEDIUM" selected>Medium</option>
+                    <option value="HIGH">High</option>
+                </select>
+
+                <label for="description">Description</label>
+                <textarea id="description" rows="5" placeholder="Describe the problem (at least 10 characters)" required></textarea>
+
+                <button type="submit">Submit Grievance</button>
+            </form>
+
+            <p id="message"></p>
+        </div>
+
+    </main>
+
+    <a href="#" class="logout-button" onclick="logout()">Logout</a>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/citizen.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+</html>

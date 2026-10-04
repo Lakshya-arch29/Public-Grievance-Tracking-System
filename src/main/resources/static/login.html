@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JanSewa Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <img src="img/logo-full.png" alt="JanSewa">
+
+        <h1 id="roleTitle">Login</h1>
+
+        <!-- Login form -->
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Sign-up form (citizens only) -->
+        <form id="registerForm" hidden>
+            <label for="regName">Full name</label>
+            <input type="text" id="regName" placeholder="Your full name" required>
+
+            <label for="regUsername">Choose a username</label>
+            <input type="text" id="regUsername" placeholder="4-30 letters, digits or _" required>
+
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" placeholder="you@example.com" required>
+
+            <label for="regPhone">Phone (10 digits)</label>
+            <input type="text" id="regPhone" inputmode="numeric" maxlength="10" placeholder="9876543210" required>
+
+            <label for="regPassword">Choose a password</label>
+            <input type="password" id="regPassword" placeholder="At least 8 characters" required>
+
+            <button type="submit">Create account</button>
+        </form>
+
+        <p id="loginMessage"></p>
+
+        <p id="switchRow" hidden>
+            <a href="#" id="switchLink">New citizen? Create an account</a>
+        </p>
+
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+
+    </div>
+
+    <script src="js/login.js"></script>
+
+</body>
+</html>
