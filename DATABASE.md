@@ -6,14 +6,14 @@
 
 ## 1. Overview
 
-Database name `jansunwai`, PostgreSQL 14 or newer (the design was written and checked against PostgreSQL 16). Six tables. Officers must have a city and a category, enforced by a CHECK constraint.
+Database name `jansewa`, PostgreSQL 14 or newer (the design was written and checked against PostgreSQL 16). Six tables. Officers must have a city, enforced by a CHECK constraint.
 
 PostgreSQL features the design relies on: FILTER aggregates (used in the statistics queries) and generated columns (used for the tracking ID).
 
 ### Relationships
 
 ```text
-city 1 ------< users (officers: city_id)         category 1 ------< users (officers: category_id)
+city 1 ------< users (officers: city_id)
 city 1 ------< grievance                         category 1 ------< grievance
 users 1 ------< grievance (citizen who filed it: user_id)
 users 1 ------< grievance (assigned officer: assigned_officer_id, optional)
@@ -35,7 +35,7 @@ Seeded once. Grievances and officers reference them, so counts by city or catego
 | full_name, username, email, phone | VARCHAR | username and email are UNIQUE |
 | password_hash | VARCHAR(100) | BCrypt hash. Plain passwords are never stored or logged. |
 | role | VARCHAR(10) | CHECK in CITIZEN, OFFICER, ADMIN |
-| city_id, category_id | INT, FK, nullable | Required for OFFICER (CHECK constraint), empty for others |
+| city_id, category_id | INT, FK, nullable | city_id required for OFFICER (CHECK constraint), category_id unused |
 | active | BOOLEAN | Default true. Disabled users cannot log in. |
 | created_at | TIMESTAMP | Default now |
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS users (
     category_id   INT REFERENCES category(category_id),
     active        BOOLEAN   NOT NULL DEFAULT TRUE,
     created_at    TIMESTAMP NOT NULL DEFAULT NOW(),
-    CHECK (role <> 'OFFICER' OR (city_id IS NOT NULL AND category_id IS NOT NULL))
+    CHECK (role <> 'OFFICER' OR city_id IS NOT NULL)
 );
 
 CREATE TABLE IF NOT EXISTS grievance (
@@ -159,7 +159,7 @@ Returns one row per officer with pending, in-progress and resolved counts, the o
 
 ```sql
 SELECT u.user_id, u.full_name, u.username, u.email, u.phone,
-       c.name AS city, cat.name AS category, u.active,
+       c.name AS city, u.active,
        COUNT(*) FILTER (WHERE g.status = 'PENDING')      AS pending,
        COUNT(*) FILTER (WHERE g.status = 'IN_PROGRESS')  AS in_progress,
        COUNT(*) FILTER (WHERE g.status = 'RESOLVED')     AS resolved,
@@ -169,11 +169,10 @@ SELECT u.user_id, u.full_name, u.username, u.email, u.phone,
               FILTER (WHERE g.status = 'RESOLVED'))::numeric, 1) AS avg_days
 FROM users u
 JOIN city c        ON c.city_id = u.city_id
-JOIN category cat  ON cat.category_id = u.category_id
 LEFT JOIN grievance g ON g.assigned_officer_id = u.user_id
 WHERE u.role = 'OFFICER'
   AND (CAST(:cityId AS INTEGER) IS NULL OR u.city_id = CAST(:cityId AS INTEGER))
-GROUP BY u.user_id, c.name, cat.name
+GROUP BY u.user_id, c.name
 ORDER BY pending DESC, u.full_name;
 ```
 
@@ -194,25 +193,9 @@ GROUP BY c.city_id, c.name
 ORDER BY pending DESC, c.name;
 ```
 
-### Auto-assignment: least-loaded officer for city and category
+### Auto-assignment: least-loaded active officer in the city
 
-Picks the active officer with the fewest open grievances for a city and category, ties broken by the lowest user id. Returns no row when nobody matches.
-
-```sql
-SELECT u.user_id
-FROM users u
-LEFT JOIN grievance g ON g.assigned_officer_id = u.user_id
-                     AND g.status IN ('PENDING', 'IN_PROGRESS')
-WHERE u.role = 'OFFICER' AND u.active
-  AND u.city_id = :cityId AND u.category_id = :categoryId
-GROUP BY u.user_id
-ORDER BY COUNT(g.grievance_id), u.user_id
-LIMIT 1;
-```
-
-### Auto-assignment fallback: same city, any category
-
-Business rule step 2 needs this second lookup, which is the same query without the category condition. The service runs the first query, and only if it returns no row runs this one.
+Picks the active officer with the fewest open grievances for a city, ties broken by the lowest user id. Returns no row when nobody matches.
 
 ```sql
 SELECT u.user_id
@@ -226,7 +209,16 @@ ORDER BY COUNT(g.grievance_id), u.user_id
 LIMIT 1;
 ```
 
-> **Verification status:** the four queries above the fallback come from the tested planning document. The fallback query is new in this split edition and has not been executed yet. Run it against the seed data at the first database checkpoint and check that it returns the least-loaded officer of the city.
+### Retroactive Auto-assignment: When an officer is activated or created
+
+Assigns any unassigned pending grievances in the city to the newly created/activated officer.
+
+```sql
+UPDATE grievance 
+SET assigned_officer_id = :officerId, updated_at = NOW() 
+WHERE assigned_officer_id IS NULL AND status = 'PENDING' 
+AND city_id = :cityId;
+```
 
 ### Category breakdown (admin dashboard)
 

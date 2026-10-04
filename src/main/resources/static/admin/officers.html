@@ -19,26 +19,26 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="grievances.html">Grievances</a>
         <a href="officers.html">Officers</a>
-
     </nav>
 
     <h2>Officer Directory</h2>
 
-    <input
-        type="text"
-        id="officerSearch"
-        placeholder="Search officers"
-    >
+    <div class="filters" style="width:min(1100px,92%);margin:0 auto 18px;">
+        <input
+            type="text"
+            id="officerSearch"
+            placeholder="Search officers by name or username"
+            onkeyup="if(event.key==='Enter') loadOfficers()"
+        >
 
-    <select id="activeFilter">
-        <option value="">All Officers</option>
-        <option value="true">Active</option>
-        <option value="false">Inactive</option>
-    </select>
+        <select id="activeFilter">
+            <option value="">All Officers</option>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+        </select>
 
-    <button onclick="loadOfficers()">Search</button>
-
-    <br><br>
+        <button onclick="loadOfficers()">Search</button>
+    </div>
 
     <table border="1">
 
@@ -57,51 +57,49 @@
 
         <tbody id="officerTable">
             <tr>
-                <td colspan="8">No officers loaded.</td>
+                <td colspan="8" style="text-align:center;color:var(--muted)">Loading…</td>
             </tr>
         </tbody>
 
     </table>
 
-    <h2>Add Officer</h2>
+    <h2 style="margin-top:32px;">Add New Officer</h2>
 
-    <form id="officerForm">
+    <div class="form-card" style="margin-bottom:80px;">
+        <form id="officerForm">
 
-        <label>Username</label>
-        <br>
-        <input type="text" id="username" required>
+            <label for="officerName">Full Name</label>
+            <input type="text" id="officerName" placeholder="Officer's full name" required>
 
-        <br><br>
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="4-30 letters, digits or _" required>
 
-        <label>Password</label>
-        <br>
-        <input type="password" id="password" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="officer@example.com" required>
 
-        <br><br>
+            <label for="phone">Phone (10 digits)</label>
+            <input type="text" id="phone" inputmode="numeric" maxlength="10" placeholder="9876543210" required>
 
-        <label>Email</label>
-        <br>
-        <input type="email" id="email" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="At least 8 characters" required>
 
-        <br><br>
+            <label for="officerCity">City</label>
+            <select id="officerCity" required>
+                <option value="">Loading cities…</option>
+            </select>
 
-        <label>Phone</label>
-        <br>
-        <input type="text" id="phone" required>
+            <button type="submit">Create Officer</button>
 
-        <br><br>
+            <p id="officerMessage" style="text-align:center;min-height:1.4em;margin-top:10px;"></p>
 
-        <button type="submit">Create Officer</button>
+        </form>
+    </div>
 
-    </form>
+    <a href="#" class="logout-button" onclick="logout()">Logout</a>
 
+    <script src="../js/api.js"></script>
     <script src="../js/admin.js"></script>
-    <a href="#" class="logout-button" onclick="logout()">
-    Logout
-</a>
-
-<script src="../js/logout.js"></script>
-
+    <script src="../js/logout.js"></script>
     <script src="../js/auth.js"></script>
 </body>
 </html>

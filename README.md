@@ -18,7 +18,7 @@ Short version:
 git clone <repository-url>
 cd jansunwai
 # create the empty database once
-psql -U postgres -c "CREATE DATABASE jansunwai;"
+psql -U postgres -c "CREATE DATABASE jansewa;"
 # set the DB password in the same terminal (never commit it)
 export DB_PASSWORD=your_password          # Windows PowerShell: $env:DB_PASSWORD="your_password"
 # start the app (tables and demo data are created automatically)
@@ -143,10 +143,10 @@ Layering rule: controllers contain no SQL, repositories contain no business rule
 | Run the app | `./mvnw spring-boot:run` |
 | Run the tests | `./mvnw test` |
 | Build a runnable jar | `./mvnw clean package` |
-| Open a psql shell | `psql -U postgres -d jansunwai` |
-| Reset all data | stop the app, `DROP DATABASE jansunwai;`, create it again, restart |
+| Open a psql shell | `psql -U postgres -d jansewa` |
+| Reset all data | stop the app, `DROP DATABASE jansewa;`, create it again, restart |
 
-Environment variables: `DB_PASSWORD` (required), `DB_USER` (default `postgres`), `DB_URL` (default `jdbc:postgresql://localhost:5432/jansunwai`).
+Environment variables: `DB_PASSWORD` (required), `DB_USER` (default `postgres`), `DB_URL` (default `jdbc:postgresql://localhost:5432/jansewa`).
 
 ## Documentation index
 

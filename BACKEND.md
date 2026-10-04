@@ -63,7 +63,7 @@ PostgreSQL
 ```text
 spring.application.name=jansunwai
 server.port=8080
-spring.datasource.url=${DB_URL:jdbc:postgresql://localhost:5432/jansunwai}
+spring.datasource.url=${DB_URL:jdbc:postgresql://localhost:5432/jansewa}
 spring.datasource.username=${DB_USER:postgres}
 spring.datasource.password=${DB_PASSWORD}
 spring.sql.init.mode=always

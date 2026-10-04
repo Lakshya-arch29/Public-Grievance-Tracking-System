@@ -19,33 +19,37 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="grievances.html">Grievances</a>
         <a href="officers.html">Officers</a>
-   
     </nav>
 
     <h2>Search and Filter</h2>
 
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="Search grievances"
-    >
+    <div class="filters" style="width:min(1100px,92%);margin:0 auto 18px;">
 
-    <select id="statusFilter">
-        <option value="">All Status</option>
-        <option value="PENDING">Pending</option>
-        <option value="IN_PROGRESS">In Progress</option>
-        <option value="RESOLVED">Resolved</option>
-        <option value="REJECTED">Rejected</option>
-    </select>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by title, tracking ID or area"
+            onkeyup="if(event.key==='Enter') loadGrievances()"
+        >
 
-    <select id="priorityFilter">
-        <option value="">All Priority</option>
-        <option value="HIGH">High</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="LOW">Low</option>
-    </select>
+        <select id="statusFilter">
+            <option value="">All Status</option>
+            <option value="PENDING">Pending</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="RESOLVED">Resolved</option>
+            <option value="REJECTED">Rejected</option>
+        </select>
 
-    <button onclick="loadGrievances()">Search</button>
+        <select id="priorityFilter">
+            <option value="">All Priority</option>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
+        </select>
+
+        <button onclick="loadGrievances()">Search</button>
+
+    </div>
 
     <h2>Grievances</h2>
 
@@ -59,30 +63,22 @@
                 <th>Priority</th>
                 <th>Status</th>
                 <th>Officer</th>
-                <th>Action</th>
+                <th>Contact Officer</th>
             </tr>
         </thead>
 
         <tbody id="grievanceTable">
             <tr>
-                <td colspan="8">No grievances loaded.</td>
+                <td colspan="8" style="text-align:center;color:var(--muted)">Loading…</td>
             </tr>
         </tbody>
     </table>
 
-    <br>
+    <a href="#" class="logout-button" onclick="logout()">Logout</a>
 
-    <button onclick="previousPage()">Previous</button>
-    <span id="pageNumber">Page 1</span>
-    <button onclick="nextPage()">Next</button>
-
+    <script src="../js/api.js"></script>
     <script src="../js/admin.js"></script>
-    <a href="#" class="logout-button" onclick="logout()">
-    Logout
-</a>
-
-<script src="../js/logout.js"></script>
-
+    <script src="../js/logout.js"></script>
     <script src="../js/auth.js"></script>
 </body>
 </html>

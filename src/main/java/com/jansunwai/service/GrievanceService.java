@@ -50,9 +50,8 @@ public class GrievanceService {
         Created created = grievances.insert(userId, req, priority);
         grievances.addHistory(created.grievanceId(), "PENDING", "Grievance submitted", userId);
 
-        // 2. Auto-assign: same city + category first, then same city, otherwise leave unassigned
-        OfficerInfo officer = grievances.findLeastLoadedOfficer(req.cityId(), req.categoryId())
-                .or(() -> grievances.findLeastLoadedOfficerInCity(req.cityId()))
+        // 2. Auto-assign: least loaded active officer in the same city
+        OfficerInfo officer = grievances.findLeastLoadedOfficerInCity(req.cityId())
                 .orElse(null);
 
         if (officer != null) {

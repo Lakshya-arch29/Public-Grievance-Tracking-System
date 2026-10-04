@@ -40,7 +40,7 @@ The output must show version 21. If it shows an older version, install JDK 21 an
 ### Step 3: create the database (once)
 
 ```bash
-psql -U postgres -c "CREATE DATABASE jansunwai;"
+psql -U postgres -c "CREATE DATABASE jansewa;"
 ```
 
 You only create the empty database. The tables and demo data are created by the application at startup.
@@ -54,7 +54,7 @@ The password is read from an environment variable so it is never committed to Gi
 | Windows PowerShell | `$env:DB_PASSWORD="your_password"` |
 | macOS or Linux | `export DB_PASSWORD=your_password` |
 
-Optional variables: `DB_USER` (default `postgres`) and `DB_URL` (default `jdbc:postgresql://localhost:5432/jansunwai`).
+Optional variables: `DB_USER` (default `postgres`) and `DB_URL` (default `jdbc:postgresql://localhost:5432/jansewa`).
 
 ### Step 5: start the application
 
@@ -76,7 +76,7 @@ Do this on every laptop before anyone writes more code.
 1. The role picker page opens at localhost:8080.
 2. Log in as `admin` on the Admin card. The dashboard shows non-zero numbers (proves the seed data loaded).
 3. Stop the app and start it again. Log in again and confirm the numbers did not double (proves the seed is safe to repeat).
-4. In pgAdmin or psql, run `\dt` in the jansunwai database. You should see six tables: city, category, users, grievance, grievance_history, auth_token.
+4. In pgAdmin or psql, run `\dt` in the jansewa database. You should see six tables: city, category, users, grievance, grievance_history, auth_token.
 5. Run `./mvnw test` and confirm the build passes.
 
 Optional command-line check that the API answers (no login needed):
@@ -95,7 +95,7 @@ It should return a JSON list of the eight seeded cities.
 | Run the tests | ./mvnw test |
 | Build a runnable jar | ./mvnw clean package |
 | Run the built jar | java -jar target/jansunwai-0.0.1-SNAPSHOT.jar |
-| Open a psql shell | psql -U postgres -d jansunwai |
+| Open a psql shell | psql -U postgres -d jansewa |
 | List tables | \dt  (inside psql) |
 | Use another port | add server.port=8081 in application.properties, or start with --server.port=8081 |
 
@@ -104,8 +104,8 @@ It should return a JSON list of the eight seeded cities.
 Stop the app first, then recreate the database and restart:
 
 ```bash
-psql -U postgres -c "DROP DATABASE jansunwai;"
-psql -U postgres -c "CREATE DATABASE jansunwai;"
+psql -U postgres -c "DROP DATABASE jansewa;"
+psql -U postgres -c "CREATE DATABASE jansewa;"
 ./mvnw spring-boot:run
 ```
 
@@ -119,7 +119,7 @@ Static files are served straight from `src/main/resources/static`. After changin
 |---|---|
 | Password authentication failed | DB_PASSWORD is not set in the same terminal that runs the app, or the password is wrong. Set it again and start the app from that terminal. |
 | Connection refused on 5432 | PostgreSQL is not running or uses another port. Start the service, or set DB_URL to the right port. |
-| database "jansunwai" does not exist | Run the CREATE DATABASE command from step 3. |
+| database "jansewa" does not exist | Run the CREATE DATABASE command from step 3. |
 | Port 8080 already in use | Stop the other program or set server.port=8081. |
 | Unsupported class file major version | A JDK older than 21 is active. Check java -version and JAVA_HOME, then restart the terminal or IDE. |
 | Cannot resolve dependencies | No internet, or a proxy is blocking Maven Central. Connect and retry. |

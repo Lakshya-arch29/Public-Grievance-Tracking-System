@@ -28,13 +28,11 @@ public class DemoDataSeeder implements CommandLineRunner {
         addUser("Admin User", "admin", "admin@example.com", "9800000000",
                 "Admin@123", "ADMIN", null, null);
 
-        // Officers: name, username, email, phone, city, category
-        addUser("Mr. Sharma",    "sharma",    "sharma@example.com",    "9800000001", "Officer@123", "OFFICER", "Pune",      "Roads & Potholes");
-        addUser("Ms. Patil",     "patil",     "patil@example.com",     "9800000003", "Officer@123", "OFFICER", "Thane",     "Water Supply");
-        addUser("Mr. Kulkarni",  "kulkarni",  "kulkarni@example.com",  "9800000004", "Officer@123", "OFFICER", "Mumbai",    "Garbage & Cleanliness");
-        addUser("Mr. Deshmukh",  "deshmukh",  "deshmukh@example.com",  "9800000005", "Officer@123", "OFFICER", "Nagpur",    "Electricity & Street Lights");
-        addUser("Ms. Iyer",      "iyer",      "iyer@example.com",      "9800000006", "Officer@123", "OFFICER", "Bengaluru", "Drainage & Sewage");
-        addUser("Mr. Khan",      "khan",      "khan@example.com",      "9800000007", "Officer@123", "OFFICER", "Delhi",     "Pollution");
+        // Clean up the old default officers so they don't clutter your dashboard
+        // First remove their associations from the grievance table to prevent foreign key errors
+        jdbc.update("UPDATE grievance SET assigned_officer_id = NULL WHERE assigned_officer_id IN (SELECT user_id FROM users WHERE username IN ('sharma', 'patil', 'kulkarni', 'deshmukh', 'iyer', 'khan'))");
+        jdbc.update("UPDATE grievance_history SET changed_by = NULL WHERE changed_by IN (SELECT user_id FROM users WHERE username IN ('sharma', 'patil', 'kulkarni', 'deshmukh', 'iyer', 'khan'))");
+        jdbc.update("DELETE FROM users WHERE username IN ('sharma', 'patil', 'kulkarni', 'deshmukh', 'iyer', 'khan')");
 
         // Citizens
         addUser("Rahul Verma", "rahul", "rahul@example.com", "9876543210", "Citizen@123", "CITIZEN", null, null);
